@@ -28,17 +28,17 @@ Now imagine that your results show the drug has some effect - it lowers the bloo
 
 >"What is the probability I would see this effect due to random fluctuations if there was actually no effect?" 
 
-Clearly, the Null hypothesis would look like: $μc=μt$. We can also create one-sided alternative hypothesis accordingly, as se saw earlier. 
+Clearly, the Null hypothesis would look like: $μc=μt$. We can also create one-sided alternative hypothesis accordingly, as we saw earlier. 
 
 The analysis of this question leads to p-value calculation using some test statistic to calculate the probability you would see an equal or greater effect under the null hypothesis. We know that when p-value is below some critical value, typically p<0.05, then the result is declared statistically significant and the null hypothesis is rejected.
 
 As a first step, perform following three steps towards generating and visualizing samples for calculating our t-statistic
 
-1. Generate 10 sample from a standard normal distribution (standard normal distribution has a mean 0 and sd of 1). Repeat this twice to simulate control and treatment group. 
+1. Generate a sample size N=10 from a standard normal distribution (standard normal distribution has a mean 0 and sd of 1). Repeat this twice to simulate control and treatment group.
 
 2. Scale up the samples to make them positive (with mean=0 and sd=1, there are bound to be negative values, shift mean to 2 instead)
 
-3. plot histograms for both samples. 
+3. Plot histograms for both samples. 
 
 
 ```python
@@ -54,7 +54,7 @@ import seaborn as sb
 
 ```python
 np.random.seed(82)
-# Using np.random.randn() generate 10 samples with mean 2
+# Use np.random.randn() to generate two different samples with size N = 10 with mean 2 
 a = None
 b = None
 ```
@@ -89,8 +89,6 @@ def welch_t(a, b):
     
     """ Calculate Welch's t statistic for two samples. """
     
-    # “ddof = Delta Degrees of Freedom”: the divisor used in the calculation is N - ddof, 
-    #  where N represents the number of elements. By default ddof is zero.
 
     t = None
     
