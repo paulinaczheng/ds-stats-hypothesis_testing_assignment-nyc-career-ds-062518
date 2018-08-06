@@ -28,17 +28,17 @@ Now imagine that your results show the drug has some effect - it lowers the bloo
 
 >"What is the probability I would see this effect due to random fluctuations if there was actually no effect?" 
 
-Clearly, the Null hypothesis would look like: $μc=μt$. We can also create one-sided alternative hypothesis accordingly, as se saw earlier. 
+Clearly, the Null hypothesis would look like: $μc=μt$. We can also create one-sided alternative hypothesis accordingly, as we saw earlier. 
 
 The analysis of this question leads to p-value calculation using some test statistic to calculate the probability you would see an equal or greater effect under the null hypothesis. We know that when p-value is below some critical value, typically p<0.05, then the result is declared statistically significant and the null hypothesis is rejected.
 
 As a first step, perform following three steps towards generating and visualizing samples for calculating our t-statistic
 
-1. Generate 10 sample from a standard normal distribution (standard normal distribution has a mean 0 and sd of 1). Repeat this twice to simulate control and treatment group. 
+1. Generate a sample size N=10 from a standard normal distribution (standard normal distribution has a mean 0 and sd of 1). Repeat this twice to simulate control and treatment group. 
 
 2. Scale up the samples to make them positive (with mean=0 and sd=1, there are bound to be negative values, shift mean to 2 instead)
 
-3. plot histograms for both samples. 
+3. Plot histograms for both samples. 
 
 
 ```python
@@ -55,7 +55,7 @@ import seaborn as sb
 
 ```python
 np.random.seed(82)
-# Using np.random.randn() generate 10 samples with mean 2
+# Use np.random.randn() to generate two different samples with size N = 10 with mean 2 
 a = np.random.randn(10) + 2 # +2 for shifting mean 
 b = np.random.randn(10) + 2
 ```
@@ -74,7 +74,7 @@ plt.hist(b, range=(-1, 6), bins=28, alpha=0.6);
 ```
 
 
-![png](output_8_0.png)
+![png](index_files/index_8_0.png)
 
 
 ## The t-test 
@@ -216,7 +216,7 @@ for ax, M in zip(axes, [10, 100, 1000, 10000]):
 ```
 
 
-![png](output_16_0.png)
+![png](index_files/index_16_0.png)
 
 
 We see that as the number of simulations gets larger, the distribution of t-statistics becomes closer and closer to the t-distribution with degrees of freedom calculated from the data. We can therefore use the t-distribution as an approximation of this process, as if we had actually performed the simulation infinite times. 
@@ -253,7 +253,7 @@ fig.tight_layout()
 ```
 
 
-![png](output_18_0.png)
+![png](index_files/index_18_0.png)
 
 
 We can see that with increasing sample size, the t-distribution can be approximated by a normal distribution with zero mean and a variance of one. 
@@ -294,7 +294,7 @@ ax.set_xlabel('Sample value')
 
 
 
-![png](output_22_1.png)
+![png](index_files/index_22_1.png)
 
 
 calculate welch-t and degree of freedom from these samples using functions developed earlier:
@@ -345,7 +345,7 @@ ax.fill_between(x, 0, t_dist, where=(x >= t), color='grey', alpha=0.5)
 
 
 
-![png](output_26_1.png)
+![png](index_files/index_26_1.png)
 
 
 The easiest way to calculate the shaded area is with the cumulative density function (CDF). 
@@ -457,7 +457,7 @@ plt.legend()
 
 
 
-![png](output_37_1.png)
+![png](index_files/index_37_1.png)
 
 
 What we see here is that the p-value is a function of the sample size. This means that regardless of effect size, if you have a large amount of data, you will get a significant p-value. It also means that if you don't have a significant p-value, an effect isn't rejected, you just can't see it through the noise.
@@ -487,7 +487,7 @@ for i, ps in enumerate(effects):
 ```
 
 
-![png](output_40_0.png)
+![png](index_files/index_40_0.png)
 
 
 It can be seen from the second set of simulations with an effect of 0.25, that If this same experiment were replicated in multiple labs in multiple locations, the chance that one particular experiment would find a statistically significant effect is about the same as getting heads from a coin flip. 
@@ -504,7 +504,7 @@ for i, each in enumerate(effects):
     Effect = 0.25, P(p < 0.05): 0.4225
     Effect = 0.5, P(p < 0.05): 0.9396
     Effect = 0.75, P(p < 0.05): 0.9995
-    
+
 
 ## Summary
 
